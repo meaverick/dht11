@@ -5,7 +5,7 @@
 #include <stdint.h>
 #define MAXTIMINGS 85
 #define DHTPIN     7
-int dht_dat[5] = {0, 0, 0, 0, 0};
+int dht11_dat[5] = {0, 0, 0, 0, 0};
 
 void read_dht11_dat(){
 	uint8_t laststate = HIGH;
@@ -39,10 +39,10 @@ void read_dht11_dat(){
 			}
 		}
 		laststate = digitalRead( DHTPIN );
-		
+
 		if ( counter == 255 )
 			break;
-		
+
 		/* ignore first 3 transitions */
 		if ( (i >= 4) && (i % 2 == 0) )
 		{
