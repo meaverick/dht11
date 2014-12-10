@@ -53,6 +53,20 @@ void read_dht11_dat(){
 			j++;
 		}
 	}
+
+	/*
+	 * check we read 40 bits (8bit x 5 ) + verify checksum in the last byte
+	 * print it out if data is good
+	 */
+	if ( (j >= 40) &&
+	     (dht11_dat[4] == ( (dht11_dat[0] + dht11_dat[1] + dht11_dat[2] + dht11_dat[3]) & 0xFF) ) )
+	{
+		f = dht11_dat[2] * 9. / 5. + 32;
+		printf( "Humidity = %d.%d %% Temperature = %d.%d *C (%.1f *F)\n",
+			dht11_dat[0], dht11_dat[1], dht11_dat[2], dht11_dat[3], f );
+	}else  {
+		printf( "Data not good, skip\n" );
+	}
 }
 
 int main(void){
